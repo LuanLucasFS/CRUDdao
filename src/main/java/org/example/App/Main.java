@@ -101,14 +101,13 @@ public class Main {
                             break;
                     }
                     break;
+                case "opengui":
+                    AppGUI gui = new AppGUI();
+                    break;
                 default:
                     System.out.println("Comando não reconhecido, favor usar o help para ver todos os comandos.");
                     break;
             }
-
         }
-
-        AppGUI gui = new AppGUI();
-
     }
 }
