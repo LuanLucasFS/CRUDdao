@@ -1,5 +1,5 @@
-## Um CRUD de contatos feito utilizando JAVA para a logica, Swing para interface, e JDBC para a conexão com o banco.
-## Feito utilizando o modelo DAO para organização.
+Um CRUD de contatos feito utilizando JAVA para a logica, Swing para interface, e JDBC para a conexão com o banco.
+Feito utilizando o modelo DAO para organização.
 
 ## Comandos:
 help                                                    / Mostra a lista com todos os comandos disponiveis
