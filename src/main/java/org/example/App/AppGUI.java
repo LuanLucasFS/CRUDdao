@@ -19,7 +19,7 @@ public class AppGUI {
     JTable table_mainFrame;
     JButton btnCriar_mainFrame, btnRemover_mainFrame, btnAtualizar_mainFrame, btnAlterar_mainFrame;
     DefaultTableModel tableModel;
-
+    // Metodo para atualização da table_mainFrame
     public void updateTable(){
         String[] Colunas = {"ID", "NOME", "EMAIL", "TELEFONE"};
         List<Contato> contatos = contatoDao.findAll();
@@ -28,8 +28,11 @@ public class AppGUI {
         table_mainFrame.setModel(tableModel);
 
     }
-    public String[][] listToArray(List<Contato> contatos){
 
+    // Metodo para conversao de List para array, 
+    // tive que fazer pra colocar os dados do db
+    // dentro da tabela. Depois vejo uma forma de arrumar.
+    public String[][] listToArray(List<Contato> contatos){
         String[][] Dados = new String[contatos.size()][4];
 
         for (int i = 0; i < contatos.size(); i++) {
@@ -41,6 +44,8 @@ public class AppGUI {
         }
         return Dados;
     }
+
+    // Criação do frame principal
     public AppGUI(){
         mainFrame = new JFrame();
         mainFrame.setSize(500, 500);
@@ -85,14 +90,13 @@ public class AppGUI {
         p1_mainFrame.add(btnRemover_mainFrame);
         p1_mainFrame.add(btnAtualizar_mainFrame);
         p1_mainFrame.add(btnAlterar_mainFrame);
+        
         p2_mainFrame = new JPanel();
 
         table_mainFrame = new JTable();
-        //table_mainFrame.setPreferredSize(new Dimension(400, 200));
-
-
         updateTable();
         table_mainFrame.setPreferredScrollableViewportSize(new Dimension(400, 190));
+        
         JScrollPane sp = new JScrollPane( table_mainFrame );
         p2_mainFrame.add(sp);
         sp.repaint();
@@ -110,6 +114,7 @@ public class AppGUI {
     JLabel nomeLbl_criarFrame, emailLbl_criarFrame, telefoneLbl_criarFrame;
     JTextField nomeTxtField_criarFrame, emailTxtField_criarFrame, telefoneTxtField_criarFrame;
     JButton confirmaBtn_criarFrame, cancelaBtn_criarFrame;
+    // Criação do frame de inserção de contatos
     public void OpenCriarFrame(){
         criarFrame = new JFrame();
         criarFrame.setSize(200, 300);
@@ -135,6 +140,8 @@ public class AppGUI {
         confirmaBtn_criarFrame = new JButton("Confirmar");
         confirmaBtn_criarFrame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // Verifica se algum dos valores passado é nulo
+                // caso seja, mostra um popup de erro
                 if(nomeTxtField_criarFrame.getText().isEmpty() || emailTxtField_criarFrame.getText().isEmpty() || telefoneTxtField_criarFrame.getText().isEmpty()){
                     JOptionPane.showMessageDialog(criarFrame,
                             "Preencha todos os campos",
@@ -148,7 +155,6 @@ public class AppGUI {
                     contatoDao.insert(contato);
                     updateTable();
                     criarFrame.dispose();
-
                 }
             }
         });
@@ -179,7 +185,8 @@ public class AppGUI {
     JTextField idTxtField_alterarFrame, nomeTxtField_alterarFrame, emailTxtField_alterarFrame, telefoneTxtField_alterarFrame;
     JButton confirmaBtn_alterarFrame, cancelaBtn_alterarFrame;
 
-
+    // Criação do frame para alteração de um contato
+    // Tenho que arrumar pra puxar o contato diretamente pelo id
     public void OpenAlterarFrame(){
         alterarFrame = new JFrame();
         alterarFrame.setSize(200, 300);
@@ -208,6 +215,7 @@ public class AppGUI {
         confirmaBtn_alterarFrame = new JButton("Confirmar");
         confirmaBtn_alterarFrame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // Verifica se o id está vazio, caso esteja mostra um popup de erro
                 if(idTxtField_alterarFrame.getText().isEmpty()){
                     JOptionPane.showMessageDialog(alterarFrame,
                             "Preencha um id",
@@ -259,6 +267,7 @@ public class AppGUI {
     JLabel idLbl_removerFrame;
     JTextField idTxtField_removerFrame;
     JButton confirmaBtn_removerFrame, cancelaBtn_removerFrame;
+    // Criação do frame de remoção por id
     public void OpenRemoverFrame(){
         removerFrame = new JFrame();
         removerFrame.setLayout(new GridLayout(2,2));
